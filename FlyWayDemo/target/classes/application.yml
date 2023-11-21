@@ -1,0 +1,46 @@
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+  datasource:
+    sample:
+      url: jdbc:mysql://localhost:9998/crud2?serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+    admin:
+      url: jdbc:mysql://localhost:9998/crud3?serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hbm2ddl:
+          auto: update
+
+  flyway:
+    enabled: true
+    sample:
+      beanName: sample_database  # Renamed to sampleDataSource
+      check-location: true
+      locations: "db/migration/sample_migration"
+      validate-on-migrate: false
+      encoding: UTF-8
+      out-of-order: true
+
+    admin:
+      beanName: admin_database  # Renamed to adminSecondDatabase
+      check-location: true
+      locations: "db/migration/admin_migration"
+      validate-on-migrate: false
+      encoding: UTF-8
+      out-of-order: true
+
+logging:
+  level:
+#    org.springframework: DEBUG
+    org.flywaydb.core: DEBUG
